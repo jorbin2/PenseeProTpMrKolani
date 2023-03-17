@@ -1,0 +1,159 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><h1 style="font-size: 20px; color: #14D5F3; text-align: center;">PenseesPourTous</h1> </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Explorer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Mon profil</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <div *ngIf="userConnected; else loginButton">
+          <div class="d-flex align-items-center">
+            <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
+              <span style="font-size: 25px;text-transform: uppercase;">{{loginUser![0]}}</span>
+            </div>
+            <span class="ml-3 text-primary">{{loginUser!}}</span>
+          </div>
+
+        </div>
+
+
+        <ng-template #loginButton>
+          <a class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Se connecter</a>
+        </ng-template>
+        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">S'inscrire</a>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Se connecter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="input1">Identifiant</label>
+            <input class="form-control" required=""  type="text"  name="username"
+
+            [(ngModel)]="username!"  >
+          </div>
+          <div class="form-group">
+            <label for="input2">Mot de passe</label>
+            <input class="form-control" required=""  type="text"  name="password"
+
+            [(ngModel)]="password!"  >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button type="submit" (click)="login(username,password)"class="btn btn-primary">Connection</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Creer un compte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="input1">Nom</label>
+            <input type="text" class="form-control" required=""   type="text"  name="username"
+
+            [(ngModel)]="username!">
+          </div>
+          <div class="form-group">
+            <label for="input2">Mot de passe</label>
+            <input class="form-control" required=""  type="text"  name="password"
+
+            [(ngModel)]="password!"  >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button type="submit" (click)="creerUser(username,password)" class="btn btn-primary">Creer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+      </div>
+    </div>
+  </div>
+</nav><br>
+
+
+
+  <div class="container bg-light"><br>
+
+
+
+
+
+  <div class="container my-5">
+    <h1 class="text-center mb-5 fst-italic text-decoration-underline" >Les pensées du jour des utilisateurs</h1><br>
+
+    <div class="card-columns">
+
+      <div class="card" *ngFor="let a of articles">
+        <div class="card-body">
+          <h5 class="card-title">{{a.title}}</h5>
+          <p class="card-text">{{a.content}}</p>
+          <p class="card-text" ><small class="text-muted"><h6 style="color: #14D5F3; ">{{a.username}}</h6></small></p>
+        </div>
+      </div>
+    </div><br>
+
+
+
+       <div class="container">
+    <h1 class="text-center my-4">Partage de pensées du jour</h1>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card my-4">
+          <div class="card-body">
+            <h2 class="card-title">Partagez votre pensée du jour</h2>
+            <form>
+              <div class="form-group">
+                <label for="titre">Titre :</label>
+                <input type="text" class="form-control" required=""   type="text"  name="titre"
+
+                [(ngModel)]="titre!">              </div>
+              <div class="form-group">
+                <label for="contenu">Contenu :</label>
+                <textarea class="form-control"  name="content"  [(ngModel)]="content!"></textarea>
+              </div><br>
+              <button type="submit" (click)="addArticle(titre!,content!)" class="btn btn-primary">Envoyer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
